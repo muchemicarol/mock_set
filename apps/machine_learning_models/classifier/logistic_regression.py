@@ -12,6 +12,15 @@ class LogisticRegression():
             sheet_name="input_1_conduit_data")
 
     def preprocessing(self):
+        """
+        Preprocess the data:
+            - import data
+            - rename columns
+            - encode material column
+            - drop null columns
+            - remove stopwords, punctuations and lemmatize text
+            - vectorize the data to feed into ml model
+        """
         material = dict()
         stopwords = nltk.corpus.stopwords.words("english")
         word_net = nltk.WordNetLemmatizer()
