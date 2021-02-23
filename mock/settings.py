@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'apps.mock_sets'
+    'apps.mock_sets',
+    'apps.machine_learning_models'
 ]
 
 MIDDLEWARE = [
