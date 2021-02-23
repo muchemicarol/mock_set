@@ -2,15 +2,15 @@ import re
 import string
 
 import nltk
-import pandas as pd 
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 
 class LogisticRegression():
     def __init__(self):
         self.data = pd.read_excel(
-            "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx", 
+            "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
             sheet_name="input_1_conduit_data")
-    
+
     def preprocessing(self):
         material = dict()
         stopwords = nltk.corpus.stopwords.words("english")
@@ -45,42 +45,7 @@ class LogisticRegression():
         vector = count_vector.fit_transform(data["short_desc"])
         vector_ = count_vector_.fit_transform(data["long_desc"])
 
-        
-
         print(pd.DataFrame(vector.todense(), columns=count_vector.get_feature_names()))
         print(pd.DataFrame(vector_.todense(), columns=count_vector_.get_feature_names()))
-        
-        return True       
 
-# alg = LogisticRegression()
-# alg.preprocessing(data = {
-#             "Short Desc": "Metallic Liquidtight Conduit, Flexible, LA, Galvanized Steel (Inner Core), PVC (Jacket)",
-#             "Long Desc": "_x000D_Type LA_x000D_",
-#             "Size": "2-1/2 in.",
-#             "Length": "100 ft.",
-#             "Material": "PVC Coated Galvanized Steel"
-#         })
-
-# alg = LogisticRegression()
-# alg.preprocessing(data = {
-#     "Short Desc": {
-#         "0": "Metallic Liquidtight Conduit, Flexible, LA, Galvanized Steel (Inner Core), PVC (Jacket)",
-#         "1": "Metallic Liquidtight Conduit, Flexible, Stainless Steel, 0 to 275 °F, 14 in Bend Radius, 25 ft L, 2 in."
-#     },
-#     "Long Desc": {
-#         "0": "_x000D_Type LA_x000D_",
-#         "1": "Metallic Liquidtight Conduit, Flexible, Stainless Steel, 0 to 275 °F, 14 in, 25 ft, 2 in"
-#     },
-#     "Size": {
-#         "0": "2-1/2 in.",
-#         "1": "2 in."
-#     },
-#     "Length": {
-#         "0": "100 ft.",
-#         "1": "25 ft."
-#     },
-#     "Material": {
-#         "0": "PVC Coated Galvanized Steel",
-#         "1": "stainless steel" 
-#     }
-# })
+        return True
