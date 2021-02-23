@@ -35,6 +35,9 @@ class LogisticRegression():
             material[column]=num
 
         def material_column(column_value):
+            """
+            encode the material column (high ordinality)
+            """
             for key, value in material.items():
                 if key == column_value:
                     return value
@@ -43,6 +46,9 @@ class LogisticRegression():
         data.dropna(inplace=True)
 
         def clean_text(text):
+            """
+            natural language processing
+            """
             text = str(text).lower()
             text = "".join(word for word in str(text) if word not in string.punctuation)
             tokens = re.split("\W+", text)
