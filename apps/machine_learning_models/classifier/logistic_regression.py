@@ -24,43 +24,47 @@ class LogisticRegression():
         material = dict()
         stopwords = nltk.corpus.stopwords.words("english")
         word_net = nltk.WordNetLemmatizer()
+        
+        try:
+            # data = pd.DataFrame(data, index=[0])
+            data = self.data
+            print(data.head())
+            data = data[["Short Desc", "Long Desc", "Size", "Length", "Material"]]
+            data.columns = data.columns.str.lower().str.replace(" ", "_")
+            data.rename(columns={"size": "size_", "length": "length_"}, inplace=True)
+            for column, num in zip(data["material"].unique().tolist(), range(0, 38)):
+                material[column]=num
 
-        # data = pd.DataFrame(data, index=[0])
-        data = self.data
-        print(data.head())
-        data = data[["Short Desc", "Long Desc", "Size", "Length", "Material"]]
-        data.columns = data.columns.str.lower().str.replace(" ", "_")
-        data.rename(columns={"size": "size_", "length": "length_"}, inplace=True)
-        for column, num in zip(data["material"].unique().tolist(), range(0, 38)):
-            material[column]=num
+            def material_column(column_value):
+                """
+                encode the material column (high ordinality)
+                """
+                for key, value in material.items():
+                    if key == column_value:
+                        return value
 
-        def material_column(column_value):
-            """
-            encode the material column (high ordinality)
-            """
-            for key, value in material.items():
-                if key == column_value:
-                    return value
+            data["material_"] = data["material"].apply(material_column)
+            data.dropna(inplace=True)
 
-        data["material_"] = data["material"].apply(material_column)
-        data.dropna(inplace=True)
+            def clean_text(text):
+                """
+                natural language processing
+                """
+                text = str(text).lower()
+                text = "".join(word for word in str(text) if word not in string.punctuation)
+                tokens = re.split("\W+", text)
+                lemmatized = [word_net.lemmatize(word) for word in tokens if word not in stopwords]
+                return lemmatized
 
-        def clean_text(text):
-            """
-            natural language processing
-            """
-            text = str(text).lower()
-            text = "".join(word for word in str(text) if word not in string.punctuation)
-            tokens = re.split("\W+", text)
-            lemmatized = [word_net.lemmatize(word) for word in tokens if word not in stopwords]
-            return lemmatized
+            count_vector = CountVectorizer(analyzer=clean_text)
+            count_vector_ = CountVectorizer(analyzer=clean_text)
+            vector = count_vector.fit_transform(data["short_desc"])
+            vector_ = count_vector_.fit_transform(data["long_desc"])
 
-        count_vector = CountVectorizer(analyzer=clean_text)
-        count_vector_ = CountVectorizer(analyzer=clean_text)
-        vector = count_vector.fit_transform(data["short_desc"])
-        vector_ = count_vector_.fit_transform(data["long_desc"])
+            print(pd.DataFrame(vector.todense(), columns=count_vector.get_feature_names()))
+            print(pd.DataFrame(vector_.todense(), columns=count_vector_.get_feature_names()))
+        
+        except Exception as e:
+            return {"status": "Error", "message": str(e)}
 
-        print(pd.DataFrame(vector.todense(), columns=count_vector.get_feature_names()))
-        print(pd.DataFrame(vector_.todense(), columns=count_vector_.get_feature_names()))
-
-        return True
+        return {"status": "OK"}
