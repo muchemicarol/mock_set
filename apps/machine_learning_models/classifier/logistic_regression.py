@@ -24,7 +24,7 @@ class LogisticRegression():
         material = dict()
         stopwords = nltk.corpus.stopwords.words("english")
         word_net = nltk.WordNetLemmatizer()
-        
+
         try:
             # data = pd.DataFrame(data, index=[0])
             data = self.data
@@ -63,7 +63,7 @@ class LogisticRegression():
 
             print(pd.DataFrame(vector.todense(), columns=count_vector.get_feature_names()))
             print(pd.DataFrame(vector_.todense(), columns=count_vector_.get_feature_names()))
-        
+
         except Exception as e:
             return {"status": "Error", "message": str(e)}
 
