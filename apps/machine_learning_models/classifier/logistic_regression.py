@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 
-class LogisticRegression():
+class RandomForest():
     def __init__(self):
         self.data = pd.read_excel(
             "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
