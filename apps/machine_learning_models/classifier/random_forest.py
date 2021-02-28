@@ -62,17 +62,26 @@ class RandomForest():
 
             short_long_desc_df = pd.concat([short_desc_df, long_desc_df], axis=1)
 
-            independent_variables = short_long_desc_df.columns
+        except Exception as e:
+            return {"status": "Error", "message": str(e)}
 
-            material_df = pd.concat([short_long_desc_df, mock_data["material_"]], axis=1)
-            size_df = pd.concat([short_long_desc_df, mock_data["size_"]], axis=1)
-            length_df = pd.concat([short_long_desc_df, mock_data["length_"]], axis=1)
-            type_df = pd.concat([short_long_desc_df, mock_data["type_"]], axis=1)
+        return short_long_desc_df
+
+    def predict(self, data):
+        return self.model.predict(data)
+
+    def postprocessing(self, prediction):
+        """
+        Decode the encoded outputs for consumption by users
+        """
+
+    def compute_prediction(self, material_df, size_df, length_df, type_df):
+        try:
+            data = self.preprocessing(data)
+            predicted_output = self.predict(data)
+            predicted_output = self.postprocessing(predicted_output)
 
         except Exception as e:
             return {"status": "Error", "message": str(e)}
 
-        return material_df, size_df, length_df, type_df
-
-    def predict(self, material_df):
-        return self.model.predict(material_df)
+        return predicted_output
