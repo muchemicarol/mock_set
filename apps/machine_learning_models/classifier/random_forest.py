@@ -1,6 +1,7 @@
 import re
 import string
 
+import joblib
 import nltk
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
@@ -8,11 +9,12 @@ from sklearn.preprocessing import LabelEncoder
 
 class RandomForest():
     def __init__(self):
-        self.data = pd.read_excel(
-            "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
-            sheet_name="input_1_conduit_data")
+        # self.data = pd.read_excel(
+        #     "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
+        #     sheet_name="input_1_conduit_data")
+        self.model = joblib.load("/home/Fiverr/Python/notebooks/sanveohr/random_forest.joblib")
 
-    def preprocessing(self):
+    def preprocessing(self, data):
         """
         Preprocess the data:
             - import data
@@ -71,3 +73,6 @@ class RandomForest():
             return {"status": "Error", "message": str(e)}
 
         return material_df, size_df, length_df, type_df
+
+    def predict(self, material_df):
+        return self.model.predict(material_df)
