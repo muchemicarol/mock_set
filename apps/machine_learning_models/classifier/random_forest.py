@@ -12,7 +12,11 @@ class RandomForest():
         # self.data = pd.read_excel(
         #     "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
         #     sheet_name="input_1_conduit_data")
-        self.material_model = joblib.load("/home/wambui/Fiverr/Python/notebooks/sanveohr/material_random_forest.joblib")
+        path = ("/home/wambui/Fiverr/Python/notebooks/sanveohr/")
+        self.material_model = joblib.load(path + "material_random_forest.joblib")
+        self.length_model = joblib.load(path + "length_random_forest.joblib")
+        self.type_model = joblib.load(path + "type_random_forest.joblib")
+        self.size_model = joblib.load(path + "/size_random_forest.joblib")
         self.empty_dataframe = pd.read_excel("/home/wambui/Fiverr/Python/notebooks/sanveohr/empty_dataframe.xlsx", )
 
     def preprocessing(self, data):
@@ -59,168 +63,170 @@ class RandomForest():
 
 
             short_long_desc_df = pd.concat([short_desc_df, long_desc_df], axis=1)
+            short_long_desc_df = short_long_desc_df.groupby(short_long_desc_df.columns, axis=1).sum()
+
 
             # print(set(short_long_desc_df.columns.tolist()) - set(empty_dataframe.columns.tolist()))
             short_long_desc_df = short_long_desc_df.drop(
                 columns=list(set(short_long_desc_df.columns.tolist()) - set(empty_dataframe.columns.tolist()))
                 )
-            # print(short_long_desc_df) 
 
-            # print(short_long_desc_df)
-            
             empty_dataframe.drop(columns=["Unnamed: 0"], inplace=True)
-            # print(empty_dataframe.head())
-            short_long_desc_df = short_long_desc_df.loc[~short_long_desc_df.index.duplicated(keep="first")]
-            empty_dataframe = empty_dataframe.loc[~empty_dataframe.index.duplicated(keep="first")]
 
 
             input_data = empty_dataframe.append(short_long_desc_df)
-            # print(empty_dataframe)
+
 
             input_data.fillna(value=0, inplace=True)
 
-        except Exception as e:
-            print(e)
+        except:
+            raise Exception
             # return {"status": "Error", "message": str(e)}
 
         return input_data
 
     def predict(self, data):
+        """
+        Prediction on input data based on trained models
+        """
         return self.material_model.predict(data)
 
     def postprocessing(self, prediction):
         """
         Decode the encoded outputs for consumption by users
         """
-        label = 200
+        material = 0
         if prediction == 0:
-            label = 0
+            material = 0
         
         elif prediction == 1:
-            label = "304 Stainless Steel"
+            material = "304 Stainless Steel"
 
         elif prediction == 2:
-            label = "316 Stainless Steel"
+            material = "316 Stainless Steel"
 
         elif prediction == 3:
-            label = "Aluminium"
+            material = "Aluminium"
 
         elif prediction == 4:
-            label = "Aluminum"
+            material = "Aluminum"
 
         elif prediction == 5:
-            label = "Carbon Strip Steel"
+            material = "Carbon Strip Steel"
 
         elif prediction == 6:
-            label = "Corrosion Resistant Plated Steel, PVC"
+            material = "Corrosion Resistant Plated Steel, PVC"
         
         elif prediction == 7:
-            label = "Electroplated Steel"
+            material = "Electroplated Steel"
 
         elif prediction == 8:
-            label = "Galvanized Steel"
+            material = "Galvanized Steel"
 
         elif prediction == 9:
-            label = "Galvanized Steel, Thermoplastic PVC (Jacket)"
+            material = "Galvanized Steel, Thermoplastic PVC (Jacket)"
 
         elif prediction == 10:
-            label = "HDPE"
+            material = "HDPE"
 
         elif prediction == 11:
-            label = "HDPE-Schedule 80"
+            material = "HDPE-Schedule 80"
 
         elif prediction == 12:
-            label = "High Density Polyethylene"
+            material = "High Density Polyethylene"
 
         elif prediction == 13:
-            label = "Hot Dipped Galvanized Steel, PVC"
+            material = "Hot Dipped Galvanized Steel, PVC"
 
         elif prediction == 14:
-            label = "Hot Galvanized Steel"
+            material = "Hot Galvanized Steel"
 
         elif prediction == 15:
-            label = "Hot-Dippedâ Galvanizedâ Steel (Inner Core); PVC"
+            material = "Hot-Dippedâ Galvanizedâ Steel (Inner Core); PVC"
 
         elif prediction == 16:
-            label = "Non-Metallic"
+            material = "Non-Metallic"
 
         elif prediction == 17:
-            label = "Non-Metallic/PVC"
+            material = "Non-Metallic/PVC"
 
         elif prediction == 18:
-            label = Nylon
+            material = Nylon
 
         elif prediction == 19:
-            label = "Nylon Resin"
+            material = "Nylon Resin"
 
         elif prediction == 20:
-            label = "Nylon, Polyamide"
+            material = "Nylon, Polyamide"
 
         elif prediction == 21:
-            label = "PVC"
+            material = "PVC"
 
         elif prediction == 22:
-            label = "PVC (Jacket), Plated Steel (Inner Core)"
+            material = "PVC (Jacket), Plated Steel (Inner Core)"
 
         elif prediction == 23:
-            label = "PVC Coated Galvanized Steel"
+            material = "PVC Coated Galvanized Steel"
 
         elif prediction == 24:
-            label = "PVC-Coated Galvanized Steel"
+            material = "PVC-Coated Galvanized Steel"
 
         elif prediction == 25:
-            label = "PVDF"
+            material = "PVDF"
 
         elif prediction == 26:
-            label = "Plenum-PVDF"
+            material = "Plenum-PVDF"
 
         elif prediction == 27:
-            label = "Riser-Nylon"
+            material = "Riser-Nylon"
 
         elif prediction == 28:
-            label = "Riser-PVDF"
+            material = "Riser-PVDF"
 
         elif prediction == 29:
-            label = "Schedule 40"
+            material = "Schedule 40"
 
         elif prediction == 30:
-            label = "Schedule 40 PVC"
+            material = "Schedule 40 PVC"
 
         elif prediction == 31:
-            label = "Schedule 80"
+            material = "Schedule 80"
 
         elif prediction == 32:
-            label = "Schedule 80 PVC"
+            material = "Schedule 80 PVC"
 
         elif prediction == 33:
-            label = "Stainless Steel"
+            material = "Stainless Steel"
 
         elif prediction == 34:
-            label = "Steel"
+            material = "Steel"
 
         elif prediction == 35:
-            label = "stainless steel"
+            material = "stainless steel"
 
-        return {"prediction": prediction, "label": label, "status": "OK"}
+        return {"prediction": prediction, "label": material, "status": "OK"}
 
 
     def compute_prediction(self, data):
+        """
+        Apply preprocessing, predictiona and post processing of data
+        """
         try:
             data = self.preprocessing(data)
-            print(data)
             predicted_output = self.predict(data)
             predicted_output = self.postprocessing(predicted_output)
 
         except Exception as e:
-            print(e)
-            # return print({"status": "Error", "message": str(e)})
+            return print({"status": "Error", "message": str(e)})
 
         return predicted_output
 
 rf = RandomForest()
 rf.compute_prediction(data = {
-        "Short Desc": "Steel Conduit Hot-Dippedâ Galvanizedâ Steel (Inner Core); PVC (Liquidtightâ Jacket), 1/2 in.",
-        "Long Desc": "1/2 in. PVC-coated galvanized steel type ATLA grey liquid-tight conduit. Conduit is 1000 ft.",
+        "Short Desc": 
+        "PVDF Resin Plenum Innerduct, 3/4 in.",
+        "Long Desc": 
+        "Product Overview:_x005F_x000D_3/4 in. PVDF Resin Plenum innerduct with 900 lb. pull line, white, the length is 3000 ft._x005F_x000D_ENDOCOR'S corrugated design provides high tensile strength with low weight per foot for ease of handling and significantly longer put ups that can be obtained with smoothwall or ribbed innerduct. PVDF resin plenum.",
         })
 # rf = RandomForest()
 # rf.postprocessing(prediction = {
