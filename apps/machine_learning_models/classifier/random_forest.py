@@ -220,16 +220,3 @@ class RandomForest():
             return print({"status": "Error", "message": str(e)})
 
         return predicted_output
-
-rf = RandomForest()
-rf.compute_prediction(data = {
-        "Short Desc": 
-        "PVDF Resin Plenum Innerduct, 3/4 in.",
-        "Long Desc": 
-        "Product Overview:_x005F_x000D_3/4 in. PVDF Resin Plenum innerduct with 900 lb. pull line, white, the length is 3000 ft._x005F_x000D_ENDOCOR'S corrugated design provides high tensile strength with low weight per foot for ease of handling and significantly longer put ups that can be obtained with smoothwall or ribbed innerduct. PVDF resin plenum.",
-        })
-# rf = RandomForest()
-# rf.postprocessing(prediction = {
-#             "Short Desc": "Metallic Liquidtight Conduit, Flexible, LA, Galvanized Steel (Inner Core), PVC (Jacket)",
-#             "Long Desc": "_x005F_x000D_Type LA_x005F_x000D_",
-#         })
