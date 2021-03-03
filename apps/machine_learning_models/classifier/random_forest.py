@@ -76,7 +76,7 @@ class RandomForest():
 
             short_long_desc_df = short_long_desc_df.drop(
                 columns=list(
-                    set(short_long_desc_df.columns.tolist()) 
+                    set(short_long_desc_df.columns.tolist())
                     - set(empty_dataframe.columns.tolist()))
                 )
 
@@ -95,9 +95,9 @@ class RandomForest():
         """
         Prediction on input data based on trained models
         """
-        return self.material_model.predict(data), 
-                self.size_model.predict(data), 
-                self.length_model.predict(data), 
+        return self.material_model.predict(data),
+                self.size_model.predict(data),
+                self.length_model.predict(data),
                 self.type_model.predict(data)
 
     def material_postprocessing(self, prediction):
@@ -107,7 +107,7 @@ class RandomForest():
         material = 0
         if prediction == 0:
             material = 0
-        
+
         elif prediction == 1:
             material = "304 Stainless Steel"
 
@@ -125,7 +125,7 @@ class RandomForest():
 
         elif prediction == 6:
             material = "Corrosion Resistant Plated Steel, PVC"
-        
+
         elif prediction == 7:
             material = "Electroplated Steel"
 
@@ -261,7 +261,7 @@ class RandomForest():
 
         if prediction ==14:
             size = "5 in."
-        
+
         if prediction == 15:
             size = "6 in."
 
@@ -487,7 +487,7 @@ class RandomForest():
         except Exception as e:
             return {"status": "Error", "message": str(e)}
 
-        return material_predicted_output, 
-                size_predicted_output, 
-                length_predicted_output, 
+        return material_predicted_output,
+                size_predicted_output,
+                length_predicted_output,
                 type_predicted_output
