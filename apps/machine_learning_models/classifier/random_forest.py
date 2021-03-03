@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 
-class RandomForest():
+class RandomForest:
     def __init__(self):
         # self.data = pd.read_excel(
         #     "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
@@ -95,372 +95,77 @@ class RandomForest():
         """
         Prediction on input data based on trained models
         """
-        return self.material_model.predict(data),
-                self.size_model.predict(data),
-                self.length_model.predict(data),
-                self.type_model.predict(data)
+        return self.material_model.predict(data),self.size_model.predict(data),self.length_model.predict(data),self.type_model.predict(data)
 
     def material_postprocessing(self, prediction):
         """
         Decode the encoded outputs for consumption by users
         """
-        material = 0
-        if prediction == 0:
-            material = 0
+        available_materials = {
+            23: 'PVC Coated Galvanized Steel', 35: 'stainless steel', 
+            21: 'PVC', 18: 'Nylon', 8: 'Galvanized Steel', 
+            33: 'Stainless Steel', 3: 'Aluminium', 26: 'Plenum-PVDF', 
+            27: 'Riser-Nylon', 28: 'Riser-PVDF', 11: 'HDPE-Schedule 80', 
+            10: 'HDPE', 31: 'Schedule 80', 29: 'Schedule 40', 
+            6: 'Corrosion Resistant Plated Steel, PVC', 
+            13: 'Hot Dipped Galvanized Steel, PVC', 
+            15: 'Hot-Dippedâ Galvanizedâ Steel (Inner Core); PVC', 
+            9: 'Galvanized Steel, Thermoplastic PVC (Jacket)', 
+            22: 'PVC (Jacket), Plated Steel (Inner Core)', 
+            24: 'PVC-Coated Galvanized Steel', 16: 'Non-Metallic', 
+            5: 'Carbon Strip Steel', 7: 'Electroplated Steel', 
+            14: 'Hot Galvanized Steel', 2: '316 Stainless Steel', 
+            34: 'Steel', 4: 'Aluminum', 1: '304 Stainless Steel', 
+            12: 'High Density Polyethylene', 0: '0', 19: 'Nylon Resin', 
+            30: 'Schedule 40 PVC', 32: 'Schedule 80 PVC', 
+            20: 'Nylon, Polyamide', 17: 'Non-Metallic/PVC', 25: 'PVDF'
+            }
+        for pred in available_materials:
+            if prediction == pred:
+                material = available_materials[pred]
 
-        elif prediction == 1:
-            material = "304 Stainless Steel"
-
-        elif prediction == 2:
-            material = "316 Stainless Steel"
-
-        elif prediction == 3:
-            material = "Aluminium"
-
-        elif prediction == 4:
-            material = "Aluminum"
-
-        elif prediction == 5:
-            material = "Carbon Strip Steel"
-
-        elif prediction == 6:
-            material = "Corrosion Resistant Plated Steel, PVC"
-
-        elif prediction == 7:
-            material = "Electroplated Steel"
-
-        elif prediction == 8:
-            material = "Galvanized Steel"
-
-        elif prediction == 9:
-            material = "Galvanized Steel, Thermoplastic PVC (Jacket)"
-
-        elif prediction == 10:
-            material = "HDPE"
-
-        elif prediction == 11:
-            material = "HDPE-Schedule 80"
-
-        elif prediction == 12:
-            material = "High Density Polyethylene"
-
-        elif prediction == 13:
-            material = "Hot Dipped Galvanized Steel, PVC"
-
-        elif prediction == 14:
-            material = "Hot Galvanized Steel"
-
-        elif prediction == 15:
-            material = "Hot-Dippedâ Galvanizedâ Steel (Inner Core); PVC"
-
-        elif prediction == 16:
-            material = "Non-Metallic"
-
-        elif prediction == 17:
-            material = "Non-Metallic/PVC"
-
-        elif prediction == 18:
-            material = Nylon
-
-        elif prediction == 19:
-            material = "Nylon Resin"
-
-        elif prediction == 20:
-            material = "Nylon, Polyamide"
-
-        elif prediction == 21:
-            material = "PVC"
-
-        elif prediction == 22:
-            material = "PVC (Jacket), Plated Steel (Inner Core)"
-
-        elif prediction == 23:
-            material = "PVC Coated Galvanized Steel"
-
-        elif prediction == 24:
-            material = "PVC-Coated Galvanized Steel"
-
-        elif prediction == 25:
-            material = "PVDF"
-
-        elif prediction == 26:
-            material = "Plenum-PVDF"
-
-        elif prediction == 27:
-            material = "Riser-Nylon"
-
-        elif prediction == 28:
-            material = "Riser-PVDF"
-
-        elif prediction == 29:
-            material = "Schedule 40"
-
-        elif prediction == 30:
-            material = "Schedule 40 PVC"
-
-        elif prediction == 31:
-            material = "Schedule 80"
-
-        elif prediction == 32:
-            material = "Schedule 80 PVC"
-
-        elif prediction == 33:
-            material = "Stainless Steel"
-
-        elif prediction == 34:
-            material = "Steel"
-
-        elif prediction == 35:
-            material = "stainless steel"
-
-        return print({"prediction": prediction, "label": material, "status": "OK"})
+        return {"prediction": prediction, "label": material, "status": "OK"}
 
     def size_postprocessing(self, prediction):
-        size = 0
-        if prediction == 0:
-            size = 0
 
-        if prediction == 1:
-            size = "1 1/4 in."
-
-        if prediction == 2:
-            size = "1 in."
-
-        if prediction == 3:
-            size = "1-1/2 in."
-
-        if prediction == 4:
-            size = "1-1/4 in."
-
-        if prediction == 5:
-            size = "1/2 in."
-
-        if prediction == 6:
-            size = "2 in."
-
-        if prediction == 7:
-            size = "2-1/2 in."
-
-        if prediction == 8:
-            size = "21 mm"
-
-        if prediction == 9:
-            size = "3 in."
-
-        if prediction == 10:
-            size = "3-1/2 in."
-
-        if prediction == 11:
-            size = "3/4 in."
-
-        if prediction ==12:
-            size = "4"
-
-        if prediction == 13:
-            size = "4 in."
-
-        if prediction ==14:
-            size = "5 in."
-
-        if prediction == 15:
-            size = "6 in."
+        available_sizes = {
+            7: '2-1/2 in.', 6: '2 in.', 5: '1/2 in.', 11: '3/4 in.', 
+            3: '1-1/2 in.', 9: '3 in.', 4: '1-1/4 in.', 2: '1 in.', 
+            13: '4 in.', 10: '3-1/2 in.', 14: '5 in.', 15: '6 in.', 
+            1: '1 1/4 in.', 8: '21 mm', 12: '4', 0: '0'
+            }
+        for pred in available_sizes:
+            if prediction == pred:
+                size = available_sizes[pred]
 
         return print({"prediction": prediction, "label": size, "status": "OK"})
 
     def length_postprocessing(self, prediction):
-        length = 0
-        if prediction == 0:
-            length = "0"
-
-        if prediction == 1:
-            length = "10 Ft."
-
-        if prediction == 2:
-            length = "10 ft."
-
-        if prediction == 3:
-            length = "10,000 ft."
-
-        if prediction == 4:
-            length = "100 ft."
-
-        if prediction == 5:
-            length = "1000 ft."
-
-        if prediction == 6:
-            length = "118.5 in."
-
-        if prediction == 7:
-            length = "119 in."
-
-        if prediction == 8:
-            length = "1400 ft."
-
-        if prediction == 9:
-            length = "15 ft."
-
-        if prediction == 10:
-            length = "20 Ft."
-
-        if prediction == 11:
-            length = "20 ft."
-
-        if prediction == 12:
-            length = "200 ft."
-
-        if prediction == 13:
-            length = "2000 ft."
-
-        if prediction == 14:
-            length = "225 ft."
-
-        if prediction == 15:
-            length = "25 Ft."
-
-        if prediction == 16:
-            length = "25 ft."
-
-        if prediction == 17:
-            length = "250 ft."
-
-        if prediction == 18:
-            length = "2500 ft."
-
-        if prediction == 19:
-            length = "2700 ft."
-
-        if prediction == 20:
-            length = "2730 ft."
-
-        if prediction == 21:
-            length = "3 ft."
-
-        if prediction == 22:
-            length = "3.50 ft."
-
-        if prediction == 23:
-            length = "3000 ft."
-
-        if prediction == 24:
-            length = "350 ft."
-
-        if prediction == 25:
-            length = "400 ft."
-
-        if prediction == 26:
-            length = "50 ft."
-
-        if prediction == 27:
-            length = "500 ft."
-
-        if prediction == 28:
-            length = "5000 ft."
-
-        if prediction == 29:
-            length = "600 ft."
-
-        if prediction == 30:
-            length = "6100 ft."
-
-        if prediction == 31:
-            length = "6500 ft."
-
-        if prediction == 32:
-            length = "700 ft."
-
-        if prediction == 33:
-            length = "750 ft."
-
-        if prediction == 34:
-            length = "7500 ft."
-
-        if prediction == 35:
-            length = "8 ft."
-
-        if prediction == 36:
-            length = "8000 ft."
-
-        if prediction == 37:
-            length = "Cut Reel"
-
-        if prediction == 38:
-            length = "Multiple"
+        available_lengths = {
+            4: '100 ft.', 16: '25 ft.', 5: '1000 ft.', 26: '50 ft.', 
+            37: 'Cut Reel', 27: '500 ft.', 12: '200 ft.', 2: '10 ft.', 
+            11: '20 ft.', 25: '400 ft.', 15: '25 Ft.', 21: '3 ft.', 
+            35: '8 ft.', 22: '3.50 ft.', 9: '15 ft.', 33: '750 ft.', 
+            17: '250 ft.', 36: '8000 ft.', 32: '700 ft.', 8: '1400 ft.', 
+            31: '6500 ft.', 28: '5000 ft.', 34: '7500 ft.', 18: '2500 ft.', 23: '3000 ft.', 29: '600 ft.', 19: '2700 ft.', 3: '10,000 ft.', 
+            0: '0', 6: '118.5 in.', 7: '119 in.', 1: '10 Ft.', 20: '2730 ft.', 30: '6100 ft.', 10: '20 Ft.', 38: 'Multiple', 24: '350 ft.', 
+            14: '225 ft.', 13: '2000 ft.'
+            }
+        for pred in available_lengths:
+            if prediction == pred:
+                length = available_lengths[pred]
 
         return print({"prediction": prediction, "label": length, "status": "OK"})
 
     def type_postprocessing(self, prediction):
-        types = 0
-        if prediction == 0:
-            types = 0
-
-        if prediction == 1:
-            types = "ATLA"
-
-        if prediction == 2:
-            types = "Corrugated"
-
-        if prediction == 3:
-            types = "Corrugated HDPE"
-
-        if prediction == 4:
-            types = "EMT"
-
-        if prediction == 5:
-            types = "ENT"
-
-        if prediction == 6:
-            types = "FMC"
-
-        if prediction == 7:
-            types = "FNC"
-
-        if prediction == 8:
-            types = "Flexible"
-
-        if prediction == 9:
-            types = "Flexible Metallic"
-
-        if prediction == 10:
-            types = "Flexible, Liquidtight"
-
-        if prediction == 11:
-            types = "GRC"
-
-        if prediction == 12:
-            types = "HDPE Conduit"
-
-        if prediction == 13:
-            types = "IMC"
-
-        if prediction == 14:
-            types = "Innerduct"
-
-        if prediction == 15:
-            types = "LFMC"
-
-        if prediction == 16:
-            types = "LFNC"
-
-        if prediction == 17:
-            types = "LL"
-
-        if prediction == 18:
-            types = "Liquidtight Flexible"
-
-        if  prediction == 19:
-            types = "PVC"
-
-        if prediction == 20:
-            types = "PVCC"
-
-        if prediction == 21:
-            types = "RMC"
-
-        if prediction == 22:
-            types = "Rise Raceway"
-
-        if prediction == 23:
-            types = "Smoothwall"
+        available_types = {
+            15: 'LFMC', 16: 'LFNC', 4: 'EMT', 6: 'FMC', 11: 'GRC', 13: 'IMC', 20: 'PVCC', 21: 'RMC', 5: 'ENT', 7: 'FNC', 14: 'Innerduct', 
+            19: 'PVC', 10: 'Flexible, Liquidtight', 8: 'Flexible', 1: 'ATLA', 18: 'Liquidtight Flexible', 0: '0', 9: 'Flexible Metallic', 
+            17: 'LL', 23: 'Smoothwall', 12: 'HDPE Conduit', 2: 'Corrugated', 3: 'Corrugated HDPE', 22: 'Rise Raceway'
+            }
+        for pred in available_types:
+            if prediction == pred:
+                types = available_types[pred]
 
         return print({"prediction": prediction, "label": types, "status": "OK"})
 
@@ -475,8 +180,7 @@ class RandomForest():
             length_predicted_output = self.predict(data)[2]
             type_predicted_output = self.predict(data)[3]
 
-            material_predicted_output = self.material_postprocessing(
-                                            material_predicted_output)
+            material_predicted_output = self.material_postprocessing(material_predicted_output)
             size_predicted_output = self.size_postprocessing(
                                             size_predicted_output)
             length_predicted_output = self.length_postprocessing(
@@ -485,9 +189,12 @@ class RandomForest():
                                             type_predicted_output)
 
         except Exception as e:
+            print(e)
             return {"status": "Error", "message": str(e)}
 
-        return material_predicted_output,
-                size_predicted_output,
-                length_predicted_output,
-                type_predicted_output
+        return material_predicted_output, size_predicted_output, length_predicted_output, type_predicted_output
+
+RandomForest().compute_prediction(data = {
+            "Short Desc": "Steel Conduit Hot-Dippedâ Galvanizedâ Steel (Inner Core); PVC (Liquidtightâ Jacket), 1/2 in.",
+            "Long Desc": "1/2 in. PVC-coated galvanized steel type ATLA grey liquid-tight conduit. Conduit is 1000 ft."
+        })
