@@ -8,4 +8,3 @@ class MLRegistry:
 
     def add_algorithm(
             self, endpoint_name, algorithm_object, algorithm_name, algorithm_status, algoritm_version, owner):
-            
