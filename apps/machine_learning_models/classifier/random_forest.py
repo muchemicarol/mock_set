@@ -13,7 +13,8 @@ class RandomForest():
         #     "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
         #     sheet_name="input_1_conduit_data")
         path = ("/home/wambui/Fiverr/Python/notebooks/sanveohr/")
-        self.material_model = joblib.load(path + "material_random_forest.joblib")
+        self.material_model = joblib.load(
+                                    path + "material_random_forest.joblib")
         self.length_model = joblib.load(path + "length_random_forest.joblib")
         self.type_model = joblib.load(path + "type_random_forest.joblib")
         self.size_model = joblib.load(path + "/size_random_forest.joblib")
@@ -58,30 +59,35 @@ class RandomForest():
             vector = count_vector.fit_transform(data["short_desc"])
             vector_ = count_vector_.fit_transform(data["long_desc"])
 
-            short_desc_df = pd.DataFrame(vector.todense(), columns=count_vector.get_feature_names())
-            long_desc_df = pd.DataFrame(vector_.todense(), columns=count_vector_.get_feature_names())
+            short_desc_df = pd.DataFrame(
+                vector.todense(), columns=count_vector.get_feature_names()
+                )
+            long_desc_df = pd.DataFrame(
+                vector_.todense(), columns=count_vector_.get_feature_names()
+                )
 
 
-            short_long_desc_df = pd.concat([short_desc_df, long_desc_df], axis=1)
-            short_long_desc_df = short_long_desc_df.groupby(short_long_desc_df.columns, axis=1).sum()
+            short_long_desc_df = pd.concat(
+                [short_desc_df, long_desc_df], axis=1
+                )
+            short_long_desc_df = short_long_desc_df.groupby(
+                short_long_desc_df.columns, axis=1).sum()
 
 
-            # print(set(short_long_desc_df.columns.tolist()) - set(empty_dataframe.columns.tolist()))
             short_long_desc_df = short_long_desc_df.drop(
-                columns=list(set(short_long_desc_df.columns.tolist()) - set(empty_dataframe.columns.tolist()))
+                columns=list(
+                    set(short_long_desc_df.columns.tolist()) 
+                    - set(empty_dataframe.columns.tolist()))
                 )
 
             empty_dataframe.drop(columns=["Unnamed: 0"], inplace=True)
 
 
             input_data = empty_dataframe.append(short_long_desc_df)
-
-
             input_data.fillna(value=0, inplace=True)
 
-        except:
-            raise Exception
-            # return {"status": "Error", "message": str(e)}
+        except Exception as e:
+            return {"status": "Error", "message": str(e)}
 
         return input_data
 
@@ -89,9 +95,12 @@ class RandomForest():
         """
         Prediction on input data based on trained models
         """
-        return self.material_model.predict(data)
+        return self.material_model.predict(data), 
+                self.size_model.predict(data), 
+                self.length_model.predict(data), 
+                self.type_model.predict(data)
 
-    def postprocessing(self, prediction):
+    def material_postprocessing(self, prediction):
         """
         Decode the encoded outputs for consumption by users
         """
@@ -204,19 +213,281 @@ class RandomForest():
         elif prediction == 35:
             material = "stainless steel"
 
-        return {"prediction": prediction, "label": material, "status": "OK"}
+        return print({"prediction": prediction, "label": material, "status": "OK"})
 
+    def size_postprocessing(self, prediction):
+        size = 0
+        if prediction == 0:
+            size = 0
+
+        if prediction == 1:
+            size = "1 1/4 in."
+
+        if prediction == 2:
+            size = "1 in."
+
+        if prediction == 3:
+            size = "1-1/2 in."
+
+        if prediction == 4:
+            size = "1-1/4 in."
+
+        if prediction == 5:
+            size = "1/2 in."
+
+        if prediction == 6:
+            size = "2 in."
+
+        if prediction == 7:
+            size = "2-1/2 in."
+
+        if prediction == 8:
+            size = "21 mm"
+
+        if prediction == 9:
+            size = "3 in."
+
+        if prediction == 10:
+            size = "3-1/2 in."
+
+        if prediction == 11:
+            size = "3/4 in."
+
+        if prediction ==12:
+            size = "4"
+
+        if prediction == 13:
+            size = "4 in."
+
+        if prediction ==14:
+            size = "5 in."
+        
+        if prediction == 15:
+            size = "6 in."
+
+        return print({"prediction": prediction, "label": size, "status": "OK"})
+
+    def length_postprocessing(self, prediction):
+        length = 0
+        if prediction == 0:
+            length = "0"
+
+        if prediction == 1:
+            length = "10 Ft."
+
+        if prediction == 2:
+            length = "10 ft."
+
+        if prediction == 3:
+            length = "10,000 ft."
+
+        if prediction == 4:
+            length = "100 ft."
+
+        if prediction == 5:
+            length = "1000 ft."
+
+        if prediction == 6:
+            length = "118.5 in."
+
+        if prediction == 7:
+            length = "119 in."
+
+        if prediction == 8:
+            length = "1400 ft."
+
+        if prediction == 9:
+            length = "15 ft."
+
+        if prediction == 10:
+            length = "20 Ft."
+
+        if prediction == 11:
+            length = "20 ft."
+
+        if prediction == 12:
+            length = "200 ft."
+
+        if prediction == 13:
+            length = "2000 ft."
+
+        if prediction == 14:
+            length = "225 ft."
+
+        if prediction == 15:
+            length = "25 Ft."
+
+        if prediction == 16:
+            length = "25 ft."
+
+        if prediction == 17:
+            length = "250 ft."
+
+        if prediction == 18:
+            length = "2500 ft."
+
+        if prediction == 19:
+            length = "2700 ft."
+
+        if prediction == 20:
+            length = "2730 ft."
+
+        if prediction == 21:
+            length = "3 ft."
+
+        if prediction == 22:
+            length = "3.50 ft."
+
+        if prediction == 23:
+            length = "3000 ft."
+
+        if prediction == 24:
+            length = "350 ft."
+
+        if prediction == 25:
+            length = "400 ft."
+
+        if prediction == 26:
+            length = "50 ft."
+
+        if prediction == 27:
+            length = "500 ft."
+
+        if prediction == 28:
+            length = "5000 ft."
+
+        if prediction == 29:
+            length = "600 ft."
+
+        if prediction == 30:
+            length = "6100 ft."
+
+        if prediction == 31:
+            length = "6500 ft."
+
+        if prediction == 32:
+            length = "700 ft."
+
+        if prediction == 33:
+            length = "750 ft."
+
+        if prediction == 34:
+            length = "7500 ft."
+
+        if prediction == 35:
+            length = "8 ft."
+
+        if prediction == 36:
+            length = "8000 ft."
+
+        if prediction == 37:
+            length = "Cut Reel"
+
+        if prediction == 38:
+            length = "Multiple"
+
+        return print({"prediction": prediction, "label": length, "status": "OK"})
+
+    def type_postprocessing(self, prediction):
+        types = 0
+        if prediction == 0:
+            types = 0
+
+        if prediction == 1:
+            types = "ATLA"
+
+        if prediction == 2:
+            types = "Corrugated"
+
+        if prediction == 3:
+            types = "Corrugated HDPE"
+
+        if prediction == 4:
+            types = "EMT"
+
+        if prediction == 5:
+            types = "ENT"
+
+        if prediction == 6:
+            types = "FMC"
+
+        if prediction == 7:
+            types = "FNC"
+
+        if prediction == 8:
+            types = "Flexible"
+
+        if prediction == 9:
+            types = "Flexible Metallic"
+
+        if prediction == 10:
+            types = "Flexible, Liquidtight"
+
+        if prediction == 11:
+            types = "GRC"
+
+        if prediction == 12:
+            types = "HDPE Conduit"
+
+        if prediction == 13:
+            types = "IMC"
+
+        if prediction == 14:
+            types = "Innerduct"
+
+        if prediction == 15:
+            types = "LFMC"
+
+        if prediction == 16:
+            types = "LFNC"
+
+        if prediction == 17:
+            types = "LL"
+
+        if prediction == 18:
+            types = "Liquidtight Flexible"
+
+        if  prediction == 19:
+            types = "PVC"
+
+        if prediction == 20:
+            types = "PVCC"
+
+        if prediction == 21:
+            types = "RMC"
+
+        if prediction == 22:
+            types = "Rise Raceway"
+
+        if prediction == 23:
+            types = "Smoothwall"
+
+        return print({"prediction": prediction, "label": types, "status": "OK"})
 
     def compute_prediction(self, data):
         """
-        Apply preprocessing, predictiona and post processing of data
+        Apply preprocessing, prediction and post processing of data
         """
         try:
             data = self.preprocessing(data)
-            predicted_output = self.predict(data)
-            predicted_output = self.postprocessing(predicted_output)
+            material_predicted_output = self.predict(data)[0]
+            size_predicted_output = self.predict(data)[1]
+            length_predicted_output = self.predict(data)[2]
+            type_predicted_output = self.predict(data)[3]
+
+            material_predicted_output = self.material_postprocessing(
+                                            material_predicted_output)
+            size_predicted_output = self.size_postprocessing(
+                                            size_predicted_output)
+            length_predicted_output = self.length_postprocessing(
+                                            length_predicted_output)
+            type_predicted_output = self.type_postprocessing(
+                                            type_predicted_output)
 
         except Exception as e:
-            return print({"status": "Error", "message": str(e)})
+            return {"status": "Error", "message": str(e)}
 
-        return predicted_output
+        return material_predicted_output, 
+                size_predicted_output, 
+                length_predicted_output, 
+                type_predicted_output
