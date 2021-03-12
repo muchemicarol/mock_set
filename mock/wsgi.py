@@ -14,3 +14,24 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mock.settings')
 
 application = get_wsgi_application()
+
+import inspect
+from apps.machine_learning_models.registry import MLRegistry
+from apps.machine_learning_models.classifier.random_forest import RandomForest
+
+try:
+    registry = MLRegistry()
+    rf = RandomForest()
+
+    registry.add_algorithm(endpoint_name="machine_learning_models",
+                            algorithm_object=rf,
+                            algorithm_name="random forest",
+                            algorithm_status="production",
+                            algoritm_version="0.0.1",
+                            owner="Carol",
+                            algorithm_description="Random forest that computes prediction",
+                            algorithm_code=inspect.getsource(RandomForest)
+    )
+
+except:
+    print("Exception while loading the algorithms to the registry,".str(e))
