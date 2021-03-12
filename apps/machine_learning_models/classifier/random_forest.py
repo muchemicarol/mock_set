@@ -124,7 +124,7 @@ class RandomForest:
             if prediction == pred:
                 material = available_materials[pred]
 
-        return print({"prediction": prediction, "label": material, "status": "OK"})
+        return {"prediction": prediction, "label": material, "status": "OK"}
 
     def size_postprocessing(self, prediction):
 
@@ -135,7 +135,7 @@ class RandomForest:
             if prediction == pred:
                 size = available_sizes[pred]
 
-        return print({"prediction": prediction, "label": size, "status": "OK"})
+        return {"prediction": prediction, "label": size, "status": "OK"}
 
     def length_postprocessing(self, prediction):
         available_lengths = self.length
@@ -145,7 +145,7 @@ class RandomForest:
             if prediction == int(pred):
                 length = available_lengths[pred]
 
-        return print({"prediction": prediction, "label": length, "status": "OK"})
+        return {"prediction": prediction, "label": length, "status": "OK"}
 
     def type_postprocessing(self, prediction):
         available_types = self.type_
@@ -155,7 +155,7 @@ class RandomForest:
             if prediction == pred:
                 types = available_types[pred]
 
-        return print({"prediction": prediction, "label": types, "status": "OK"})
+        return {"prediction": prediction, "label": types, "status": "OK"}
 
     def compute_prediction(self, data):
         """
@@ -181,9 +181,3 @@ class RandomForest:
             return {"status": "Error", "message": str(e)}
 
         return material_predicted_output, size_predicted_output, length_predicted_output, type_predicted_output
-
-# RandomForest().compute_prediction(data = {
-#             "Short Desc": "PolyTuff® I Non-Metallic Grey Liquidtight Flexible Conduit, 1-1/4 in.",
-#             "Long Desc": "_x000D_1-1/4 in. PolyTuff® I grey non-metallic liquidtight flexible conduit, length 100 ft._x000D_\
-#             Hubbell Polytuff I Conduit and Polytuff II Tubing are entirely non-metallic, providing superior flexibility and outstanding corrosion resistance._x000D_"
-#         })
