@@ -9,7 +9,8 @@ from apps.mock_sets.models import (
 from apps.mock_sets.serializers import (
     EndpointSerializer, MLAlgorithmSerializer, MLAlgorithmStatusSerializer, MLRequestSerializer
     )
-from server.wsgi import registry
+from apps.machine_learning_models.registry import MLRegistry
+from mock.wsgi import registry
 
 # Create your views here.
 class EndpointViewSet(
@@ -74,7 +75,7 @@ class PredictView(views.APIView):
 
         label = prediction["label"] if "label" in prediction else "error"
         ml_request = MLRequest(
-            input_data=json.dumps(request.data),
+            input_data=request.data,
             full_response=prediction,
             response=label,
             feedback="",
