@@ -23,7 +23,7 @@ try:
     registry = MLRegistry()
     rf = RandomForest()
 
-    registry.add_algorithm(endpoint_name="machine_learning_models",
+    registry.add_algorithm(endpoint_name="classifier",
                             algorithm_object=rf,
                             algorithm_name="random forest",
                             algorithm_status="production",
