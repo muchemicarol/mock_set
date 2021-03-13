@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'apps.mock_sets',
-    'apps.machine_learning_models'
+    'apps.machine_learning_models',
 ]
 
 MIDDLEWARE = [

@@ -2,6 +2,7 @@ from django.shortcuts import render
 import json
 from numpy.random import rand
 from rest_framework import (viewsets, mixins, views, status)
+from rest_framework.response import Response
 
 from apps.mock_sets.models import (
     Endpoint, MLAlgorithm, MLAlgorithmStatus, MLRequest,
@@ -68,11 +69,12 @@ class PredictView(views.APIView):
             )
         alg_index = 0
         if algorithm_status == "ab_testing":
-            alg_index = 0 if rand() < 0.5 else 1
+            alg_index = 0
 
         algorithm_object = registry.endpoints[algs[alg_index].id]
         prediction = algorithm_object.compute_prediction(request.data)
 
+        print(prediction)
         label = prediction["label"] if "label" in prediction else "error"
         ml_request = MLRequest(
             input_data=request.data,
@@ -83,6 +85,6 @@ class PredictView(views.APIView):
         )
         ml_request.save()
 
-        prediction["request_id"] = ml_request.id
+        # prediction["request_id"] = ml_request.id
 
         return Response(prediction)

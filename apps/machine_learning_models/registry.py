@@ -2,6 +2,10 @@ from apps.mock_sets.models import Endpoint
 from apps.mock_sets.models import MLAlgorithm
 from apps.mock_sets.models import MLAlgorithmStatus
 
+from apps.machine_learning_models.classifier.random_forest import RandomForest
+
+import inspect
+
 class MLRegistry:
     def __init__(self):
         self.endpoints = {}
@@ -35,3 +39,15 @@ class MLRegistry:
 
         # add to registry
         self.endpoints[database_object.id] = algorithm_object
+
+registry = MLRegistry()
+rf = RandomForest()
+registry.add_algorithm(endpoint_name="classifier",
+                            algorithm_object=rf,
+                            algorithm_name="random forest",
+                            algorithm_status="production",
+                            algoritm_version="0.0.1",
+                            owner="Carol",
+                            algorithm_description="Random forest that computes prediction",
+                            algorithm_code=inspect.getsource(RandomForest)
+    )
