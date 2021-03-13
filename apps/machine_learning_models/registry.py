@@ -39,15 +39,3 @@ class MLRegistry:
 
         # add to registry
         self.endpoints[database_object.id] = algorithm_object
-
-registry = MLRegistry()
-rf = RandomForest()
-registry.add_algorithm(endpoint_name="classifier",
-                            algorithm_object=rf,
-                            algorithm_name="random forest",
-                            algorithm_status="production",
-                            algoritm_version="0.0.1",
-                            owner="Carol",
-                            algorithm_description="Random forest that computes prediction",
-                            algorithm_code=inspect.getsource(RandomForest)
-    )
