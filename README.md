@@ -14,3 +14,11 @@ Navigate into the virtual environment:
 `source env_name/bin/activate`
 
 Import the libraries as indicated in `requirements.txt`
+
+Retrain Model
+-------------
+1. Ensure the csv is on same file as notebook
+2. Open shell/terminal and run python3 filename.py
+3. Model is trained, saved and accuracy displayed.
+
+Run your predictions on saved trained model.
