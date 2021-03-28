@@ -13,7 +13,7 @@ class RandomForest:
         # self.data = pd.read_excel(
         #     "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
         #     sheet_name="input_1_conduit_data")
-        path = ("/home/wambui/Fiverr/Python/notebooks/sanveohr/{}")
+        path = ("/home/wambui/Fiverr/Python/mock_set/mock/apps/machine_learning_models/notebooks/sanveohr/{}")
         self.material_model = joblib.load(
                                     path.format(
                                         "material_random_forest.joblib"))

@@ -3,6 +3,7 @@ from apps.mock_sets.models import MLAlgorithm
 from apps.mock_sets.models import MLAlgorithmStatus
 
 from apps.machine_learning_models.classifier.random_forest import RandomForest
+from apps.machine_learning_models.classifier.random_forest_wire import RandomForestWire
 
 import inspect
 
@@ -11,7 +12,7 @@ class MLRegistry:
         self.endpoints = {}
 
     def add_algorithm(
-            self, endpoint_name, algorithm_object, algorithm_name, algorithm_status, algoritm_version, owner, algorithm_description, algorithm_code):
+            self, endpoint_name, algorithm_object, algorithm_name, algorithm_status, algorithm_version, owner, algorithm_description, algorithm_code):
 
         # get endpoint
         endpoint, _ = Endpoint.objects.get_or_create(
@@ -22,7 +23,7 @@ class MLRegistry:
             name=algorithm_name,
             description=algorithm_description,
             code=algorithm_code,
-            version=algoritm_version,
+            version=algorithm_version,
             owner=owner,
             parent_endpoint=endpoint
         )
