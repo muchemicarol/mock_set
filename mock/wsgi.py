@@ -33,5 +33,5 @@ try:
                             algorithm_code=inspect.getsource(RandomForest)
     )
 
-except:
-    print("Exception while loading the algorithms to the registry,".str(e))
+except Exception as e:
+    print("Exception while loading the algorithms to the registry",str(e))
