@@ -61,12 +61,6 @@ mock_data.columns
 mock_data.isnull().sum()
 
 
-# In[7]:
-
-
-# if 
-
-
 # ## Preprocessing Data, Feature Selection and Model
 
 # In[8]:
@@ -113,24 +107,6 @@ mock_data[mock_data["short_desc"] == "Non-Metallic Gray Liquidtight Flexible Con
 
 
 type_
-
-
-# In[13]:
-
-
-mock_data[mock_data["type_"] == 0]
-
-
-# In[14]:
-
-
-mock_data["type"].unique()
-
-
-# In[15]:
-
-
-mock_data["material"].unique()
 
 
 # In[16]:
