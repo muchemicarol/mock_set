@@ -1,0 +1,1 @@
+{6: "PVC Coated Galvanized Steel", 13: "stainless steel", 5: "PVC", 4: "Nylon", 1: "Galvanized Steel", 12: "Stainless Steel", 0: "Aluminium", 7: "Plenum-PVDF", 8: "Riser-Nylon", 9: "Riser-PVDF", 3: "HDPE-Schedule 80", 2: "HDPE", 11: "Schedule 80", 10: "Schedule 40"}

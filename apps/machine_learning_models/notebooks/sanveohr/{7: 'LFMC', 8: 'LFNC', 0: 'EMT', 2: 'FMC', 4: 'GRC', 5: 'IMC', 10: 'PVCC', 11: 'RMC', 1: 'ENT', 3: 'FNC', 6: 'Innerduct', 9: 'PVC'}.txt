@@ -1,0 +1,1 @@
+{7: 'LFMC', 8: 'LFNC', 0: 'EMT', 2: 'FMC', 4: 'GRC', 5: 'IMC', 10: 'PVCC', 11: 'RMC', 1: 'ENT', 3: 'FNC', 6: 'Innerduct', 9: 'PVC'}
