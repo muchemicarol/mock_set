@@ -23,3 +23,6 @@ Retrain Model
 4. Model is trained, saved and accuracy displayed.
 
 Run your predictions on saved trained model.
+
+## Author
+Carol Muchemi
