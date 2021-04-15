@@ -40,6 +40,6 @@ Run your predictions on saved trained model.
 Carol Muchemi
 
 ### References:
-https://pypi.org/project/pip/
-https://note.nkmk.me/en/python-pip-install-requirements/
-https://www.liquidweb.com/kb/how-to-setup-a-python-virtual-environment-on-windows-10/
+- https://pypi.org/project/pip/
+- https://note.nkmk.me/en/python-pip-install-requirements/
+- https://www.liquidweb.com/kb/how-to-setup-a-python-virtual-environment-on-windows-10/
