@@ -15,7 +15,8 @@ Start project by creating a virtual environment
 
 Navigate into the virtual environment:
 
-`source env_name/bin/activate`
+Linux: `source env_name/bin/activate`
+Windows: `\pathto\env\Scripts\activate`
 
 Install the libraries as indicated in `requirements.txt` using:
 
@@ -38,6 +39,7 @@ Run your predictions on saved trained model.
 ## Author
 Carol Muchemi
 
-References:
+### References:
 https://pypi.org/project/pip/
 https://note.nkmk.me/en/python-pip-install-requirements/
+https://www.liquidweb.com/kb/how-to-setup-a-python-virtual-environment-on-windows-10/
