@@ -7,13 +7,24 @@ Installation
 ------------
 Start project by creating a virtual environment
 
+`pip install pip`
+
+`pip install virtualvenv`
+
 `virtualvenv env_name`
 
 Navigate into the virtual environment:
 
 `source env_name/bin/activate`
 
-Import the libraries as indicated in `requirements.txt`
+Install the libraries as indicated in `requirements.txt` using:
+
+`pip install -r requirements.txt`
+
+Run Server
+-----------
+* Navigate into folder with `manage.py`
+* Open folder in terminal and run server through `python manage.py runserver`
 
 Retrain Model
 -------------
@@ -26,3 +37,7 @@ Run your predictions on saved trained model.
 
 ## Author
 Carol Muchemi
+
+References:
+https://pypi.org/project/pip/
+https://note.nkmk.me/en/python-pip-install-requirements/
