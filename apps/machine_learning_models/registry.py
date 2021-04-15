@@ -3,7 +3,7 @@ from apps.mock_sets.models import MLAlgorithm
 from apps.mock_sets.models import MLAlgorithmStatus
 
 from apps.machine_learning_models.classifier.random_forest import RandomForest
-from apps.machine_learning_models.classifier.random_forest_wire import RandomForestWire
+
 
 import inspect
 
