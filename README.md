@@ -26,6 +26,7 @@ Run Server
 -----------
 * Navigate into folder with `manage.py`
 * Open folder in terminal and run server through `python manage.py runserver`
+* Access programe using `http://127.0.0.1:8000/api/version1/classifier/predict`
 
 Retrain Model
 -------------
