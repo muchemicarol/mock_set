@@ -13,16 +13,17 @@ class RandomForest:
         # self.data = pd.read_excel(
         #     "/home/wambui/Fiverr/Python/notebooks/sanveohr/mockdata_set.xlsx",
         #     sheet_name="input_1_conduit_data")
-        path = ("/home/wambui/Fiverr/Python/mock_set/mock/apps/machine_learning_models/notebooks/sanveohr/{}")
+        path = (
+            "/home/wambui/Fiverr/Python/mock_set/mock/apps/machine_learning_models/notebooks/sanveohr/{}")
         self.material_model = joblib.load(
                                     path.format(
                                         "material_random_forest.joblib"))
         self.length_model = joblib.load(
-                                    path.format("length_random_forest.joblib"))
+                                    path.format("length_decision_trees.joblib"))
         self.type_model = joblib.load(
                                     path.format("type_random_forest.joblib"))
         self.size_model = joblib.load(
-                                    path.format("/size_random_forest.joblib"))
+                                    path.format("/size_decision_trees.joblib"))
         self.empty_dataframe = pd.read_excel(
                                     path.format("empty_dataframe.xlsx"))
 
@@ -124,7 +125,7 @@ class RandomForest:
             if prediction == pred:
                 material = available_materials[pred]
 
-        return {"prediction": prediction, "label": material, "status": "OK"}
+        return print({"prediction": prediction, "label": material, "status": "OK"})
 
     def size_postprocessing(self, prediction):
 
@@ -135,7 +136,7 @@ class RandomForest:
             if prediction == pred:
                 size = available_sizes[pred]
 
-        return {"prediction": prediction, "label": size, "status": "OK"}
+        return print({"prediction": prediction, "label": size, "status": "OK"})
 
     def length_postprocessing(self, prediction):
         available_lengths = self.length
@@ -145,7 +146,7 @@ class RandomForest:
             if prediction == int(pred):
                 length = available_lengths[pred]
 
-        return {"prediction": prediction, "label": length, "status": "OK"}
+        return print({"prediction": prediction, "label": length, "status": "OK"})
 
     def type_postprocessing(self, prediction):
         available_types = self.type_
@@ -155,7 +156,7 @@ class RandomForest:
             if prediction == pred:
                 types = available_types[pred]
 
-        return {"prediction": prediction, "label": types, "status": "OK"}
+        return print({"prediction": prediction, "label": types, "status": "OK"})
 
     def compute_prediction(self, data):
         """
@@ -181,3 +182,9 @@ class RandomForest:
             return {"status": "Error", "message": str(e)}
 
         return material_predicted_output, size_predicted_output, length_predicted_output, type_predicted_output
+
+test = RandomForest()
+test.compute_prediction(data={
+            "Short Desc": "Steel Conduit Hot-Dipped Galvanized Steel (Inner Core); PVC (Liquidtight Jacket), 1/2 in.",
+            "Long Desc": "1/2 in. PVC-coated galvanized steel type ATLA grey liquid-tight conduit. Conduit is 1000 ft."
+        })

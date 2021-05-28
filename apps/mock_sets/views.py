@@ -74,7 +74,6 @@ class PredictView(views.APIView):
         algorithm_object = registry.endpoints[algs[alg_index].id]
         prediction = algorithm_object.compute_prediction(request.data)
 
-        print(prediction)
         label = prediction["label"] if "label" in prediction else "error"
         ml_request = MLRequest(
             input_data=request.data,
@@ -85,6 +84,6 @@ class PredictView(views.APIView):
         )
         ml_request.save()
 
-        # prediction["request_id"] = ml_request.id
+        prediction["request_id"] = ml_request.id
 
         return Response(prediction)
