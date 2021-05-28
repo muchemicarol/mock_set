@@ -27,7 +27,7 @@ try:
                             algorithm_object=rf,
                             algorithm_name="random forest",
                             algorithm_status="production",
-                            algoritm_version="0.0.1",
+                            algorithm_version="0.0.1",
                             owner="Carol",
                             algorithm_description="Random forest that computes prediction",
                             algorithm_code=inspect.getsource(RandomForest)

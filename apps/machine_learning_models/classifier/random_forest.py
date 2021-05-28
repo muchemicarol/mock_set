@@ -19,11 +19,11 @@ class RandomForest:
                                     path.format(
                                         "material_random_forest.joblib"))
         self.length_model = joblib.load(
-                                    path.format("length_random_forest.joblib"))
+                                    path.format("length_decision_trees.joblib"))
         self.type_model = joblib.load(
                                     path.format("type_random_forest.joblib"))
         self.size_model = joblib.load(
-                                    path.format("/size_random_forest.joblib"))
+                                    path.format("/size_decision_trees.joblib"))
         self.empty_dataframe = pd.read_excel(
                                     path.format("empty_dataframe.xlsx"))
 
